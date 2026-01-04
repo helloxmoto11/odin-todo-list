@@ -13,6 +13,26 @@ export class Todo {
         this.#completed = completed;
     }
 
+    getTitle() {
+        return this.#title;
+    }
+
+    getDescription() {
+        return this.#description;
+    }
+
+    getDate() {
+        return this.#date;
+    }
+
+    getPriority() {
+        return this.#priority;
+    }
+
+    getCompleted() {
+        return this.#completed;
+    }
+
     toJSON() {
         return {
             title: this.#title,
@@ -38,7 +58,7 @@ export class Project {
     static fromJSON(jsonString) {
         const data = JSON.parse(jsonString);
         const todos = data.todos.map(todo => {
-            return new Todo(todo.title, todo.description, todo.data, todo.priority, todo.completed);
+            return new Todo(todo.title, todo.description, todo.date, todo.priority, todo.completed);
         })
         return new Project(data.name, todos)
 
