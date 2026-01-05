@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    --delete-btn-color: #ff4c4c
+}
+
+body {
+    display: flex;
+    height: 100%;
+    background-color: #615f5f;
+}
+
+
+main {
+    height: 100vh;
+    flex: 1;
+    padding: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 1rem;
+}

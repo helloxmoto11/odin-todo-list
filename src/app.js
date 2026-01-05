@@ -1,7 +1,9 @@
 import StorageHelper from "./storage.js";
 import {Todo, Category} from "./todo";
 import UiBuilder from "./ui";
-import "./style.css";
+import "./style/style.css";
+import "./style/nav.css";
+import "./style/card.css";
 
 class App {
     constructor() {

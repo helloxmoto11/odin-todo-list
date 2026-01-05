@@ -1,0 +1,37 @@
+
+nav {
+    height: 100vh;
+    width: 300px;
+    min-width: 300px;
+    background-color: #333131;
+    box-shadow: 5px 0 10px #333;
+    z-index: 1;
+}
+
+.nav-inner {
+    padding: 1rem;
+}
+
+h1 {
+    margin: auto;
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 2px solid white;
+}
+
+h3 {
+    font-size: 1.5rem;
+    padding-bottom: .5rem;
+}
+
+.proj-wrapper {
+    padding: .5rem;
+    border-radius: 0.5rem;
+    margin-bottom: .5rem;
+    border: 1px solid #615f5f;
+    cursor: pointer;
+}
+
+.selected-proj-wrapper {
+    background-color: #615f5f;
+}
