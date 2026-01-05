@@ -1,5 +1,5 @@
 import nav from "./nav";
-import Card from "./card";
+import Card, {AddNewTodoCard, AddTodoFormCard} from "./card";
 
 export default class UiBuilder {
   #selectedProject;
@@ -38,6 +38,8 @@ export default class UiBuilder {
         ),
       );
     });
+    this.app.appendChild(AddNewTodoCard());
+    this.app.appendChild(AddTodoFormCard());
   }
 
   render(projects, onDeleteTodo) {

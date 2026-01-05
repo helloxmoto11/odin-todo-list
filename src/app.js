@@ -32,21 +32,21 @@ class App {
             "Do Laundry",
             "I need to do all my laundry",
             "2026-01-02",
-            "HIGH",
+            "LOW",
             false,
         );
         const todo2 = new Todo(
             "Study Thai",
             "Stop being lazy",
             "2026-01-04",
-            "HIGH",
+            "IMPORTANT",
             false,
         );
         const todo3 = new Todo(
             "Grocery Shopping",
             "Time to buy food!",
             "2026-01-04",
-            "HIGH",
+            "URGENT",
             false,
         );
         category.addTodo(todo);

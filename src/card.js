@@ -25,12 +25,11 @@ export default function Card(id, title, description, date, priority, completed, 
     completedWrapper.append(completedLabel, todoCompleted);
 
     const dateAndCompletedWrapper = document.createElement("div");
-    dateAndCompletedWrapper.classList.add("dateAndPriority");
+    dateAndCompletedWrapper.classList.add("dateAndCompleted");
     dateAndCompletedWrapper.append(cardDate, completedWrapper);
 
-    card.appendChild(dateAndCompletedWrapper);
-    card.appendChild(cardTitle);
-    card.appendChild(cardDescription);
+    const todoPriority = document.createElement("div");
+    todoPriority.innerHTML = `Priority: <span class="priority ${priority.toLowerCase()}">${priority}</span>`;
 
     const delBtn = document.createElement('button');
     delBtn.className = 'delete-button';
@@ -38,7 +37,89 @@ export default function Card(id, title, description, date, priority, completed, 
     delBtn.addEventListener('click', () => {
         onDelete(id);
     });
+
+
+    card.appendChild(dateAndCompletedWrapper);
+    card.appendChild(cardTitle);
+    card.appendChild(todoPriority);
+    card.appendChild(cardDescription);
     card.appendChild(delBtn);
+
+    return card;
+}
+
+export function AddNewTodoCard() {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("new-card-wrapper")
+    wrapper.innerHTML = '<button><span class="material-symbols-outlined add-icon">add</span></button>';
+    card.appendChild(wrapper);
+    return card;
+}
+
+export function AddTodoFormCard() {
+    const card = document.createElement("div");
+    card.id = "add-todo-form"
+    card.classList.add("card");
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("add-todo-card-container")
+
+    const titleWrapper = document.createElement("div");
+    titleWrapper.classList.add("input-wrapper");
+    const titleLabel = document.createElement("label");
+    titleLabel.innerText = "Title"
+    const titleInput = document.createElement("input");
+    titleWrapper.append(titleLabel, titleInput)
+
+    const descriptionWrapper = document.createElement("div");
+    descriptionWrapper.classList.add("input-wrapper");
+    const descriptionLabel = document.createElement("label");
+    descriptionLabel.innerText = "Description"
+    const descriptionInput = document.createElement("input");
+    descriptionWrapper.append(descriptionLabel, descriptionInput);
+
+    const dateWrapper = document.createElement("div");
+    dateWrapper.classList.add("input-wrapper");
+    const dateLabel = document.createElement("label");
+    dateLabel.innerText = "Date"
+    const dateInput = document.createElement("input");
+    dateInput.type = "date";
+    dateWrapper.append(dateLabel, dateInput)
+
+    const priorityWrapper = document.createElement("div");
+    priorityWrapper.classList.add("input-wrapper");
+    const priorityLabel = document.createElement("label");
+    priorityLabel.innerText = "Priority"
+    const prioritySelect = document.createElement("select");
+    const options = ["LOW", "IMPORTANT", "URGENT"];
+    options.forEach((option) => {
+        const opt = document.createElement("option");
+        opt.value = option.toLowerCase();
+        opt.innerText = option;
+        prioritySelect.appendChild(opt);
+    })
+    priorityWrapper.append(priorityLabel, prioritySelect);
+
+    const dateAndPriorityWrapper = document.createElement("div");
+    dateAndPriorityWrapper.classList.add("dateAndPriority");
+    dateAndPriorityWrapper.append(dateWrapper, priorityWrapper);
+
+    const buttonWrapper = document.createElement("div");
+    buttonWrapper.classList.add("input-button-wrapper");
+    const cancelButton = document.createElement("button");
+    cancelButton.innerText = "Cancel";
+    cancelButton.classList.add("button-cancel");
+    const addButton = document.createElement("button");
+    addButton.innerText = "Add";
+    addButton.classList.add("button-add");
+    buttonWrapper.append(cancelButton, addButton);
+
+    const inputContainer = document.createElement("div");
+    inputContainer.classList.add("input-container");
+    inputContainer.append(titleWrapper, descriptionWrapper, dateAndPriorityWrapper)
+    wrapper.append(inputContainer, buttonWrapper);
+    card.appendChild(wrapper);
 
     return card;
 }

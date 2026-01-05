@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     color: #ffffff;
-    --delete-btn-color: #a8190d
+    --delete-btn-color: #ff4c4c
 }
 
  .material-symbols-outlined {
@@ -14,6 +14,11 @@
              'opsz' 24;
 
      color: var(--delete-btn-color);
+ }
+
+ .add-icon {
+     font-size: 4rem;
+     color: lawngreen;
  }
 
 body {
@@ -47,14 +52,53 @@ main {
 }
 
 .card {
-    padding: 1rem;
-    width: 380px;
-    min-width: 380px;
-    height: 150px;
+    padding: .75rem;
+    width: 390px;
+    min-width: 390px;
+    height: 200px;
     background-color: #333131;
     border-radius: 1rem;
     box-shadow: 5px 0 10px #333;
     position: relative;
+}
+
+.new-card-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-todo-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+#add-todo-form div label {
+    flex: 1;
+    box-sizing: border-box;
+    padding-left: .125rem;
+}
+
+#add-todo-form div input {
+    flex: 3;
+}
+.priority {
+    font-size: .9rem;
+}
+
+.priority.low {
+    color: lawngreen;
+}
+
+.priority.important {
+    color: orange;
+}
+
+.priority.urgent {
+    color: var(--delete-btn-color);
 }
 
 .completed-wrapper {
@@ -63,17 +107,70 @@ main {
     align-items: center;
 }
 
+input {
+    background-color: gray;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: .125rem
+}
+
+.dateAndPriority {
+    display: flex;
+    gap: 1rem;
+}
+
+select  {
+    background-color: gray;
+    height: 25px;
+    border-radius: .25rem
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 .delete-button {
     position: absolute;
     bottom: 1rem;
     right: .75rem;
-    background: none;
-    border: none;
-    cursor: pointer;
     color: var(--delete-btn-color);
 }
 
-.dateAndPriority {
+.input-button-wrapper {
+    margin-top: .25rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+}
+
+.button-add {
+    border: 1px solid lawngreen;
+    border-radius: .25rem;
+    color: lawngreen;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 72px;
+}
+
+.button-cancel {
+    padding: 0.25rem;
+    border: 1px solid var(--delete-btn-color);
+    border-radius: .25rem;
+    color: var(--delete-btn-color);
+    font-size: 1rem;
+    font-weight: bold;
+    width: 72px;
+}
+
+.dateAndCompleted {
     display: flex;
     justify-content: space-between;
 }
