@@ -1,16 +1,22 @@
 export class Todo {
+    #id;
     #title;
     #description;
     #date;
     #priority;
     #completed;
 
-    constructor(title, description, date, priority, completed) {
+    constructor(title, description, date, priority, completed, id = crypto.randomUUID()) {
+        this.#id = id;
         this.#title = title;
         this.#description = description;
         this.#date = date;
         this.#priority = priority;
         this.#completed = completed;
+    }
+
+    getId() {
+        return this.#id;
     }
 
     getTitle() {
@@ -35,6 +41,7 @@ export class Todo {
 
     toJSON() {
         return {
+            id: this.#id,
             title: this.#title,
             description: this.#description,
             date: this.#date,
@@ -46,7 +53,8 @@ export class Todo {
 
 export class Category {
 
-    constructor(name, todos = []) {
+    constructor(name, todos = [], id = crypto.randomUUID()) {
+        this.id = id;
         this.name = name;
         this.todos = todos;
     }
@@ -58,11 +66,9 @@ export class Category {
     static fromJSON(jsonString) {
         const data = JSON.parse(jsonString);
         const todos = data.todos.map(todo => {
-            return new Todo(todo.title, todo.description, todo.date, todo.priority, todo.completed);
+            return new Todo(todo.title, todo.description, todo.date, todo.priority, todo.completed, todo.id);
         })
-        return new Category(data.name, todos)
-
-
+        return new Category(data.name, todos, data.id);
     }
 }
 

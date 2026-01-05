@@ -1,4 +1,4 @@
-export default function Card(title, description, date, priority, completed, onDelete) {
+export default function Card(id, title, description, date, priority, completed, onDelete) {
     const card = document.createElement("div");
     card.classList.add("card");
     const cardTitle = document.createElement("h2");
@@ -15,11 +15,11 @@ export default function Card(title, description, date, priority, completed, onDe
 
     const todoCompleted = document.createElement("input");
     todoCompleted.type = "checkbox";
-    todoCompleted.id = `${title.replaceAll(' ', "-")}-completed`;
+    todoCompleted.id = `completed-${id}`;
     todoCompleted.checked = completed;
     const completedLabel = document.createElement("label");
     completedLabel.innerText = "Completed";
-    completedLabel.htmlFor = `${title.replaceAll(' ', '-')}-completed`;
+    completedLabel.htmlFor = `completed-${id}`;
     const completedWrapper = document.createElement("div");
     completedWrapper.classList.add("completed-wrapper");
     completedWrapper.append(completedLabel, todoCompleted);
@@ -36,7 +36,7 @@ export default function Card(title, description, date, priority, completed, onDe
     delBtn.className = 'delete-button';
     delBtn.innerHTML = '<span class="material-symbols-outlined">delete</span>';
     delBtn.addEventListener('click', () => {
-        onDelete(title);
+        onDelete(id);
     });
     card.appendChild(delBtn);
 

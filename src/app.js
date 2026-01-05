@@ -16,9 +16,14 @@ class App {
             this.#initializeProjects();
         }
         const projects = this.storageHelper.getAllItems();
-        console.log(projects);
-        console.log(projects.toSorted((a,b) => a.name.length - b.name.length));
-        this.uiBuilder.render(projects);
+        this.uiBuilder.render(projects, (categoryName, todoId) => this.handleDelete(categoryName, todoId));
+    }
+
+    handleDelete(categoryName, todoId) {
+        console.log(`Delete ${categoryName}: ${todoId}`);
+        console.log("category to delete: ", this.storageHelper.getCategory(categoryName));
+        this.storageHelper.deleteTodo(categoryName, todoId);
+        this.run();
     }
 
     #initializeProjects() {
