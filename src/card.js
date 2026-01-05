@@ -1,4 +1,4 @@
-export default function Card(title, description, date, priority, completed) {
+export default function Card(title, description, date, priority, completed, onDelete) {
     const card = document.createElement("div");
     card.classList.add("card");
     const cardTitle = document.createElement("h2");
@@ -31,6 +31,11 @@ export default function Card(title, description, date, priority, completed) {
     card.appendChild(dateAndCompletedWrapper);
     card.appendChild(cardTitle);
     card.appendChild(cardDescription);
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'delete-button';
+    delBtn.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+    card.appendChild(delBtn);
 
     return card;
 }

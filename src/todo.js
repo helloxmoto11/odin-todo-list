@@ -44,7 +44,7 @@ export class Todo {
     }
 }
 
-export class Project {
+export class Category {
 
     constructor(name, todos = []) {
         this.name = name;
@@ -60,7 +60,7 @@ export class Project {
         const todos = data.todos.map(todo => {
             return new Todo(todo.title, todo.description, todo.date, todo.priority, todo.completed);
         })
-        return new Project(data.name, todos)
+        return new Category(data.name, todos)
 
 
     }

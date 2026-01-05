@@ -1,5 +1,5 @@
 import StorageHelper from "./storage.js";
-import {Todo, Project} from "./todo";
+import {Todo, Category} from "./todo";
 import UiBuilder from "./ui";
 import "./style.css";
 
@@ -22,7 +22,7 @@ class App {
     }
 
     #initializeProjects() {
-        const project = new Project("First Project");
+        const category = new Category("First Category");
         const todo = new Todo(
             "Do Laundry",
             "I need to do all my laundry",
@@ -44,21 +44,21 @@ class App {
             "HIGH",
             false,
         );
-        project.addTodo(todo);
-        project.addTodo(todo2);
-        project.addTodo(todo3);
+        category.addTodo(todo);
+        category.addTodo(todo2);
+        category.addTodo(todo3);
 
-        const project2 = new Project("Second Project");
+        const category2 = new Category("Second Category");
         const todo4 = new Todo(
             "Iron Clothes",
             "Get ready for work",
             "2026-01-05",
             "LOW",
-            false,
+            true,
         );
-        project2.addTodo(todo4);
-        this.storageHelper.save(project.name, JSON.stringify(project));
-        this.storageHelper.save(project2.name, JSON.stringify(project2));
+        category2.addTodo(todo4);
+        this.storageHelper.save(category);
+        this.storageHelper.save(category2);
     }
 }
 

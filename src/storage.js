@@ -1,4 +1,4 @@
-import {Project} from "./todo";
+import {Category} from "./todo";
 
 export default class StorageHelper {
     #storage;
@@ -11,8 +11,9 @@ export default class StorageHelper {
         return this.#storage.length;
     }
 
-    save(key, value) {
-        this.#storage.setItem(key, JSON.stringify(value));
+    save(category) {
+        console.log(category);
+        this.#storage.setItem(category.name.replaceAll(" ", "-"), JSON.stringify(category));
     }
 
     getItem(key) {
@@ -23,8 +24,9 @@ export default class StorageHelper {
         const projects = [];
         const allItems = Object.entries(this.#storage);
         allItems.forEach(([key, value]) => {
+            console.log(value)
             const firstProject = JSON.parse(value);
-            projects.push(Project.fromJSON(firstProject))
+            projects.push(Category.fromJSON(JSON.stringify(firstProject)));
         })
         return projects;
     }
