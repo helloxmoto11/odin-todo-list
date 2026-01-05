@@ -1,5 +1,5 @@
 import nav from "./nav";
-import Card, {AddNewTodoCard, AddTodoFormCard} from "./card";
+import Card, {AddNewTodoCard, AddTodoFormCard, CreateFlippableTodoCard} from "./card";
 
 export default class UiBuilder {
   #selectedProject;
@@ -38,8 +38,7 @@ export default class UiBuilder {
         ),
       );
     });
-    this.app.appendChild(AddNewTodoCard());
-    this.app.appendChild(AddTodoFormCard());
+    this.app.appendChild(CreateFlippableTodoCard());
   }
 
   render(projects, onDeleteTodo) {

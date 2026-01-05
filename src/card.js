@@ -123,3 +123,38 @@ export function AddTodoFormCard() {
 
     return card;
 }
+
+export function CreateFlippableTodoCard() {
+    const scene = document.createElement("div");
+    scene.classList.add("scene");
+
+    const cardInner = document.createElement("div");
+    cardInner.classList.add("card-inner");
+
+    // 1. Create the Front (The "Add New" placeholder)
+    const frontFace = AddNewTodoCard();
+    frontFace.classList.add("card-face", "card-face--front");
+
+    // 2. Create the Back (The Form)
+    const backFace = AddTodoFormCard();
+    backFace.classList.add("card-face", "card-face--back");
+
+    // Assemble
+    cardInner.append(frontFace, backFace);
+    scene.append(cardInner);
+
+    // 3. Trigger the flip
+    // Flip to form when clicking the placeholder
+    frontFace.addEventListener("click", () => {
+        cardInner.classList.add("is-flipped");
+    });
+
+    // Flip back when clicking "Cancel"
+    const cancelButton = backFace.querySelector(".button-cancel");
+    cancelButton.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent re-triggering frontFace click
+        cardInner.classList.remove("is-flipped");
+    });
+
+    return scene;
+}
