@@ -1,7 +1,6 @@
 
 
 export default function Nav(projects, selectedProject, onSelectProject) {
-    console.log(projects);
     const nav = document.querySelector("nav");
     nav.replaceChildren()
     const title = document.createElement("h1");
@@ -9,7 +8,7 @@ export default function Nav(projects, selectedProject, onSelectProject) {
     nav.appendChild(title);
 
     const projectsTitle = document.createElement("h3");
-    projectsTitle.innerText = "Projects";
+    projectsTitle.innerText = "Categories";
     nav.appendChild(projectsTitle);
 
     projects.forEach((project) => {

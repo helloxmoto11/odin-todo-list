@@ -8,7 +8,6 @@ export default class UiBuilder {
     constructor() {
         this.app = document.getElementById("app");
         this.#selectedProject = "First Project";
-        console.log("UI Builder Instantiated");
     }
 
     #onSelectProject(name) {
@@ -25,7 +24,6 @@ export default class UiBuilder {
         console.log(project);
         const todos = project.todos;
         todos.forEach(todo => {
-            console.log(todo)
             this.app.appendChild(Card(todo.getTitle(), todo.getDescription(), todo.getDate(), todo.getPriority(), todo.getCompleted()));
 
         })

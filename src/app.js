@@ -17,6 +17,7 @@ class App {
         }
         const projects = this.storageHelper.getAllItems();
         console.log(projects);
+        console.log(projects.toSorted((a,b) => a.name.length - b.name.length));
         this.uiBuilder.render(projects);
     }
 

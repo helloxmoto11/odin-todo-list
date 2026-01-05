@@ -24,7 +24,6 @@ export default class StorageHelper {
         const allItems = Object.entries(this.#storage);
         allItems.forEach(([key, value]) => {
             const firstProject = JSON.parse(value);
-            console.log(firstProject);
             projects.push(Project.fromJSON(firstProject))
         })
         return projects;

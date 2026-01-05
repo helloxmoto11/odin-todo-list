@@ -15,13 +15,20 @@ export default function Card(title, description, date, priority, completed) {
 
     const todoCompleted = document.createElement("input");
     todoCompleted.type = "checkbox";
+    todoCompleted.id = `${title.replaceAll(' ', "-")}-completed`;
     todoCompleted.checked = completed;
+    const completedLabel = document.createElement("label");
+    completedLabel.innerText = "Completed";
+    completedLabel.htmlFor = `${title.replaceAll(' ', '-')}-completed`;
+    const completedWrapper = document.createElement("div");
+    completedWrapper.classList.add("completed-wrapper");
+    completedWrapper.append(completedLabel, todoCompleted);
 
-    const dateAndPriorityWrapper = document.createElement("div");
-    dateAndPriorityWrapper.classList.add("dateAndPriority");
-    dateAndPriorityWrapper.append(cardDate, cardPriority);
+    const dateAndCompletedWrapper = document.createElement("div");
+    dateAndCompletedWrapper.classList.add("dateAndPriority");
+    dateAndCompletedWrapper.append(cardDate, completedWrapper);
 
-    card.appendChild(dateAndPriorityWrapper);
+    card.appendChild(dateAndCompletedWrapper);
     card.appendChild(cardTitle);
     card.appendChild(cardDescription);
 

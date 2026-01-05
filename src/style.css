@@ -2,12 +2,13 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: white;
+    color: #ffffff;
 }
 
 body {
     display: flex;
     height: 100%;
+    background-color: #615f5f;
 }
 
 nav {
@@ -42,10 +43,12 @@ main {
     background-color: #333131;
     border-radius: 1rem;
     box-shadow: 5px 0 10px #333;
-
-
 }
-
+.completed-wrapper {
+    display: flex;
+    gap: .25rem;
+    align-items: center;
+}
 .dateAndPriority {
     display: flex;
     justify-content: space-between;
