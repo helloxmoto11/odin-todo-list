@@ -35,6 +35,9 @@ export default function Card(title, description, date, priority, completed, onDe
     const delBtn = document.createElement('button');
     delBtn.className = 'delete-button';
     delBtn.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+    delBtn.addEventListener('click', () => {
+        onDelete(title);
+    });
     card.appendChild(delBtn);
 
     return card;
