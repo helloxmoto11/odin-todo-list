@@ -1,10 +1,11 @@
 import nav from "./nav";
-import Card, {AddNewTodoCard, AddTodoFormCard, CreateFlippableTodoCard} from "./card";
+import Card, {CreateFlippableTodoCard,} from "./card";
 
 export default class UiBuilder {
   #selectedProject;
   #projects;
   #onDeleteTodo;
+  #onAddCategory;
 
   constructor() {
     this.app = document.getElementById("app");
@@ -17,7 +18,12 @@ export default class UiBuilder {
   }
 
   buildNav(projects) {
-    nav(projects, this.#selectedProject, (name) => this.#onSelectProject(name));
+    nav(
+      projects,
+      this.#selectedProject,
+      (name) => this.#onSelectProject(name),
+      (newProjectName) => this.#onSelectProject(newProjectName),
+    );
   }
 
   buildCards(projects) {
@@ -41,9 +47,10 @@ export default class UiBuilder {
     this.app.appendChild(CreateFlippableTodoCard());
   }
 
-  render(projects, onDeleteTodo) {
+  render(projects, onDeleteTodo, onAddCategory) {
     this.#projects = projects;
     this.#onDeleteTodo = onDeleteTodo;
+    this.#onAddCategory = onAddCategory;
     this.app.replaceChildren();
     this.buildNav(projects);
     this.buildCards(projects);
