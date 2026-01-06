@@ -18,11 +18,13 @@ export default class StorageHelper {
     }
 
     getCategory(name) {
-        const data = this.#storage.getItem(name.replaceAll(" ", "-"));
-        if (data) {
-            return Category.fromJSON(data)
+        const rawData = this.#storage.getItem(this.#DATA_KEY);
+        if (rawData) {
+            const data = JSON.parse(rawData);
+            const category = data.find((category) => category.name === name);
+            return Category.fromJSON(category);
         } else {
-            console.log(`Category ${name} not found.`);
+            throw new Error("Category not found: " + name);
         }
     }
 
@@ -36,11 +38,14 @@ export default class StorageHelper {
     }
 
     deleteTodo(categoryName, todoId) {
-        const data = this.#storage.getItem(categoryName.replaceAll(" ", "-"));
-        if (data) {
-            const category = Category.fromJSON(data);
+        const categories = this.getAllCategories();
+        if (categories.length) {
+            const category = categories.find(category => category.name === categoryName);
+            if (!category) {
+                throw new Error("Category not found: " + categoryName);
+            }
             category.todos = category.todos.filter(todo => todo.getId() !== todoId);
-            this.save(category);
+            this.save(categories);
         } else {
             console.log(`Category ${categoryName} not found!`);
         }
