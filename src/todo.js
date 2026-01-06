@@ -63,8 +63,7 @@ export class Category {
         this.todos.push(todo);
     }
 
-    static fromJSON(jsonString) {
-        const data = JSON.parse(jsonString);
+    static fromJSON(data) {
         const todos = data.todos.map(todo => {
             return new Todo(todo.title, todo.description, todo.date, todo.priority, todo.completed, todo.id);
         })
