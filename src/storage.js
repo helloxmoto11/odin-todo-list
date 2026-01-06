@@ -3,6 +3,8 @@ import {Category} from "./todo";
 export default class StorageHelper {
     #storage;
 
+    #DATA_KEY = "todo-data";
+
     constructor() {
         this.#storage = window.localStorage;
     }
@@ -11,9 +13,8 @@ export default class StorageHelper {
         return this.#storage.length;
     }
 
-    save(category) {
-        console.log(category);
-        this.#storage.setItem(category.name.replaceAll(" ", "-"), JSON.stringify(category));
+    save(categories) {
+        this.#storage.setItem(this.#DATA_KEY, JSON.stringify(categories));
     }
 
     getCategory(name) {
@@ -25,14 +26,13 @@ export default class StorageHelper {
         }
     }
 
-    getAllItems() {
-        const projects = [];
-        const allItems = Object.entries(this.#storage);
-        allItems.forEach(([key, value]) => {
-            const firstProject = JSON.parse(value);
-            projects.push(Category.fromJSON(JSON.stringify(firstProject)));
-        })
-        return projects;
+    getAllCategories() {
+        const rawData = this.#storage.getItem(this.#DATA_KEY);
+        if (!rawData) {
+            return []
+        }
+        const data = JSON.parse(rawData);
+        return data.map((item) => Category.fromJSON(item));
     }
 
     deleteTodo(categoryName, todoId) {
