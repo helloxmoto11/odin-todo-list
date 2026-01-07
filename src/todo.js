@@ -39,6 +39,10 @@ export class Todo {
         return this.#completed;
     }
 
+    setCompleted(completed) {
+        this.#completed = completed;
+    }
+
     toJSON() {
         return {
             id: this.#id,

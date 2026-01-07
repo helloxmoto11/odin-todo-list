@@ -17,6 +17,29 @@ export default class StorageHelper {
         this.#storage.setItem(this.#DATA_KEY, JSON.stringify(categories));
     }
 
+    saveTodo(categoryName, todo) {
+        const categories = this.getAllCategories();
+        const category = categories.find((category) => category.name === categoryName);
+        if (category) {
+            category.todos.push(todo);
+        } else {
+            throw new Error(`${categoryName} not found`);
+        }
+        this.save(categories);
+    }
+
+    updateTodo(selectedCategory, updatedTodo) {
+        console.log(selectedCategory,updatedTodo)
+        const categories = this.getAllCategories();
+        const category = categories.find((category) => category.name === selectedCategory);
+        if (category) {
+            const todo = category.todos.find((todo) => todo.id === updatedTodo.id)
+            const index = category.todos.indexOf(todo);
+            category.todos.splice(index, 1, updatedTodo);
+        }
+        this.save(categories);
+    }
+
     getCategory(name) {
         const rawData = this.#storage.getItem(this.#DATA_KEY);
         if (rawData) {

@@ -17,14 +17,43 @@ class App {
             console.log("Local storage is empty. initializing...");
             this.#initializeProjects();
         }
-        const projects = this.storageHelper.getAllItems();
-        this.uiBuilder.render(projects, (categoryName, todoId) => this.handleDelete(categoryName, todoId));
+        const categories = this.storageHelper.getAllCategories();
+        this.uiBuilder.render(
+            categories,
+            (categoryName, todo) => this.handleAddTodo(categoryName, todo),
+            (categoryName, todoId) => this.handleDeleteTodo(categoryName, todoId),
+            (newCategoryName) => this.handleAddCategory(newCategoryName),
+            (categoryId) => this.handleDeleteCategory(categoryId),
+            (selectedCategory, completed, todo) => this.handleOnCompletedChange(selectedCategory, completed, todo),
+        );
     }
 
-    handleDelete(categoryName, todoId) {
+    handleAddTodo(categoryName, todo) {
+        this.storageHelper.saveTodo(categoryName, todo);
+        this.run();
+    }
+
+    handleOnCompletedChange(selectedCategory, completed, todo) {
+        todo.setCompleted(completed);
+        this.storageHelper.updateTodo(selectedCategory, todo);
+        this.run();
+    }
+
+    handleDeleteTodo(categoryName, todoId) {
         console.log(`Delete ${categoryName}: ${todoId}`);
-        console.log("category to delete: ", this.storageHelper.getCategory(categoryName));
         this.storageHelper.deleteTodo(categoryName, todoId);
+        this.run();
+    }
+
+    handleAddCategory(categoryName) {
+        const allCategories = this.storageHelper.getAllCategories();
+        allCategories.push(new Category(categoryName));
+        this.storageHelper.save(allCategories);
+        this.run();
+    }
+
+    handleDeleteCategory(categoryId) {
+        this.storageHelper.deleteCategory(categoryId);
         this.run();
     }
 
@@ -55,17 +84,7 @@ class App {
         category.addTodo(todo2);
         category.addTodo(todo3);
 
-        const category2 = new Category("Second Category");
-        const todo4 = new Todo(
-            "Iron Clothes",
-            "Get ready for work",
-            "2026-01-05",
-            "LOW",
-            true,
-        );
-        category2.addTodo(todo4);
-        this.storageHelper.save(category);
-        this.storageHelper.save(category2);
+        this.storageHelper.save([category]);
     }
 }
 
