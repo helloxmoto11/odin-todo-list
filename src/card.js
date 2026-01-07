@@ -142,7 +142,7 @@ export function AddTodoFormCard(onAddTodo) {
             titleInput.value,
             descriptionInput.value,
             dateInput.value,
-            prioritySelect.value,
+            prioritySelect.value.toUpperCase(),
             false,
         );
         onAddTodo(newTodo);
