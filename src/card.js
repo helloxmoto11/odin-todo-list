@@ -49,7 +49,8 @@ export default function Card(
     const delBtn = document.createElement("button");
     delBtn.className = "delete-button";
     delBtn.innerHTML = '<span class="material-symbols-outlined">delete</span>';
-    delBtn.addEventListener("click", () => {
+    delBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
         onDelete(id);
     });
 
@@ -124,10 +125,19 @@ export function AddTodoFormCard(onAddTodo) {
     const buttonWrapper = document.createElement("div");
     buttonWrapper.classList.add("input-button-wrapper");
     const cancelButton = document.createElement("button");
+    cancelButton.addEventListener("click", (e) => {
+        setTimeout(() =>{
+            titleInput.value = "";
+            descriptionInput.value = "";
+            dateInput.value = new Date().toISOString().slice(0, 10);
+
+        }, 600)
+    })
     cancelButton.innerText = "Cancel";
     cancelButton.classList.add("button-cancel");
     const addButton = document.createElement("button");
     addButton.addEventListener("click", () => {
+        if (!titleInput.value) return;
         const newTodo = new Todo(
             titleInput.value,
             descriptionInput.value,

@@ -17,7 +17,7 @@ export default class UiBuilder {
 
     #onSelectProject(name) {
         this.#selectedCategory = name;
-        this.render(this.#categories, this.#onDeleteTodo, this.#onAddCategory, this.#onDeleteCategory);
+        this.render(this.#categories,this.#onAddTodo, this.#onDeleteTodo, this.#onAddCategory, this.#onDeleteCategory, this.#onCompletedChange);
     }
 
     buildNav(projects) {

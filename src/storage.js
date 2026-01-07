@@ -29,15 +29,16 @@ export default class StorageHelper {
     }
 
     updateTodo(selectedCategory, updatedTodo) {
-        console.log(selectedCategory,updatedTodo)
         const categories = this.getAllCategories();
-        const category = categories.find((category) => category.name === selectedCategory);
+        const category = categories.find((cat) => cat.name === selectedCategory);
+
         if (category) {
-            const todo = category.todos.find((todo) => todo.id === updatedTodo.id)
-            const index = category.todos.indexOf(todo);
-            category.todos.splice(index, 1, updatedTodo);
+            const index = category.todos.findIndex((t) => t.getId() === updatedTodo.getId());
+            if (index !== -1) {
+                category.todos[index] = updatedTodo;
+                this.save(categories);
+            }
         }
-        this.save(categories);
     }
 
     getCategory(name) {
