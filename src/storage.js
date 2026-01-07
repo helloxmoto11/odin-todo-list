@@ -37,6 +37,11 @@ export default class StorageHelper {
         return data.map((item) => Category.fromJSON(item));
     }
 
+    deleteCategory(categoryId) {
+        const categories = this.getAllCategories();
+        this.save(categories.filter(category => category.id !== categoryId));
+    }
+
     deleteTodo(categoryName, todoId) {
         const categories = this.getAllCategories();
         if (categories.length) {
@@ -51,11 +56,4 @@ export default class StorageHelper {
         }
     }
 
-    removeAll(key) {
-        this.#storage.clear();
-    }
-
-    update(key, value) {
-        this.#storage.setItem(key, value);
-    }
 }
